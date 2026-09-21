@@ -151,8 +151,8 @@ remain unavailable until the reusable Python workflow is promoted there.
 
 ### `.github/workflows/frontend-ci.yml`
 
-Runs the frontend's formatting, lint, Svelte check, build, and Node tests through shared CI when frontend files change.
-It checks out matching `dev` or `main` refs for both local package dependencies.
+Runs the frontend's formatting, lint, Svelte check, build, and Node tests through shared CI when frontend files change
+on `dev`, or on manual dispatch. It checks out matching refs for both local package dependencies.
 
 ### `.github/workflows/auto-release.yml`
 
@@ -166,7 +166,7 @@ reviewing the generated plan and explicitly enabling publication for an approved
 Calls the [shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml) with these
 local details:
 
-- triggers: pushes to `dev` and `main`, plus manual dispatch
+- triggers: pushes to `main`, plus manual and upstream-watch dispatches on `dev` or `main`
 - working directory: `frontend`
 - destination: `s3://cyaris.github.io/pixel_portrait/`
 - production naming: unprefixed bundles from `main`
