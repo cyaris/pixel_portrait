@@ -146,13 +146,13 @@ secret so trusted user or agent-authored pushes to `dev` can open the pull reque
 
 ### `.github/workflows/backend-ci.yml`
 
-Runs Black, isort, and pytest when backend files change. The caller follows shared automation's `main` branch and will
-remain unavailable until the reusable Python workflow is promoted there.
+Runs Black, isort, and pytest when backend files change on `main`, or on manual dispatch. The caller follows shared
+automation's `main` branch and will remain unavailable until the reusable Python workflow is promoted there.
 
 ### `.github/workflows/frontend-ci.yml`
 
-Runs the frontend's formatting, lint, Svelte check, build, and Node tests through shared CI when frontend files change
-on `dev`, or on manual dispatch. It checks out matching refs for both local package dependencies.
+Runs the frontend's formatting, lint, Svelte check, build, and Node tests through shared CI on manual dispatch. It
+checks out matching refs for both local package dependencies.
 
 ### `.github/workflows/auto-release.yml`
 
@@ -186,7 +186,7 @@ corresponding upstream code without waiting for a push here.
 
 ### `.github/workflows/workflow-validation.yml`
 
-Runs on `dev` and `main` pushes that change `.github/release-policy.yml`, `.github/workflows/**`, or `renovate.json`,
+Runs on `main` pushes that change `.github/release-policy.yml`, `.github/workflows/**`, or `renovate.json`,
 and on manual dispatch, then calls the
 [shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
 to validate rollup upload wrapper logic, release-policy configuration, and Renovate configuration.
