@@ -139,10 +139,12 @@ behavior, inputs, and secrets.
 
 ### `.github/workflows/auto-create-dev-pr.yml`
 
-Runs on pushes to `dev`, then calls the
+Runs on pushes to `dev` and `main` and on manual dispatch, skipping `dev` pushes while the `DEV_PR_OPEN` repository
+variable is `true`, then calls the
 [shared auto-create-dev-pr workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-create-dev-pryml)
-to open a pull request from `dev` to `main` when one doesn't already exist. It passes the repository's `RELEASE_TOKEN`
-secret so trusted user or agent-authored pushes to `dev` can open the pull request.
+to open a pull request from `dev` to `main` when one doesn't already exist. It passes the repository's `CHECKOUT_TOKEN`
+secret to record `DEV_PR_OPEN` and its `RELEASE_TOKEN` secret so trusted user or agent-authored pushes to `dev` can
+open the pull request.
 
 ### `.github/workflows/backend-ci.yml`
 
