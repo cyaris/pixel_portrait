@@ -1,11 +1,5 @@
 # Repository Guidance
 
-## Shared Conventions
-
-- Inherit README and Markdown style, GitHub Actions, reusable workflow wrapper, release policy, dispatch, pull-request
-  review, workflow failure, commit, and release-management rules from `../shared-automation/AGENTS.md`.
-- Inherit shared Python and SQL conventions from `../shared-automation/AGENTS.md`.
-
 ## Auto Transition Timing
 
 - Keep every Auto Transition mode's full-set completion duration and inter-set delay independently configurable. Define
@@ -26,14 +20,13 @@
 
 ## Pixel Grid Rendering
 
-- Draw each pixel-grid boundary once in `drawPixelSeparators`, not as a per-pixel `strokeRect`. Derive its alpha from
-  the more-visible neighboring cell and its position from device-pixel-snapped `columnPositions`/`rowPositions` lookup
-  tables built once per geometry in `getSeparatorBuffers`. Do not reintroduce per-pixel strokes in pixel display
-  functions; they double interior line weight and rasterize unevenly on Safari.
+- Draw each pixel-grid boundary once, per `../shared-automation/agents/charts.md`, in `drawPixelSeparators` rather
+  than as a per-pixel `strokeRect` in a pixel display function. Derive its alpha from the more-visible neighboring
+  cell and its position from the device-pixel-snapped `columnPositions`/`rowPositions` lookup tables
+  `getSeparatorBuffers` builds once per geometry.
 - Keep `separatorAlpha` at `0.31` unless deliberately changing the cross-device design. It reproduces the original
   `0.075` CSS-pixel SVG hairline at 2x density and must remain the same on desktop and mobile.
-- Laser-eye circles intentionally begin as solid dots and open into rings as they grow. Keep `strokeOrFillCircle` for
-  radii below half the stroke width; a plain `stroke()` creates an incorrect hollow ring.
+- Laser-eye circles intentionally begin as solid dots and open into rings as they grow, through `strokeOrFillCircle`.
 - Scale the laser-eye starting radius and stroke width from the rendered portrait width, preserving the original values
   at the 400 px source-image width so responsive layouts retain the same proportions.
 
