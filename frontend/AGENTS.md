@@ -10,3 +10,4 @@
   - `embedded-bundles.md`
   - `jekyll-hosting.md`
   - `charts.md`
+  - `web-pages.md`
